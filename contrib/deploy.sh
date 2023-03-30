@@ -12,4 +12,4 @@ echo "==> Update"
 echo "$1" | sudo -S git pull
 
 echo "==> Restart"
-echo "$1" | sudo -S make start
+echo "$1" | sudo -S make restart
