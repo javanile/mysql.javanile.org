@@ -16,7 +16,7 @@ deploy:
 
 restart:
 	@docker compose pull
-	@docker compose up -d --force-recreate && sleep 10
+	@docker compose up -d --force-recreate && sleep 15
 	@docker compose logs mysql
 
 ## =====
