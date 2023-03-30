@@ -15,4 +15,5 @@ deploy:
 	@cat contrib/deploy.sh | make -s ssh
 
 restart:
+	@docker compose pull
 	@docker compose up -d --force-recreate
