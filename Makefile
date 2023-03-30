@@ -6,6 +6,7 @@ ssh:
 	@sshpass -p $${SSH_PASSWORD} ssh $${SSH_USER}@${SSH_HOST} -p $${SSH_PORT:-22} bash -s -- $${SSH_PASSWORD}
 
 deploy:
+	@date > contrib/RELEASE
 	@git add .
 	@git commit -am "Deploy"
 	@git push
