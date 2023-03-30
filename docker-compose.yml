@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  mysql:
+    image: javanile/mysql:8.0.31
+    ports:
+      - 3306:3306
