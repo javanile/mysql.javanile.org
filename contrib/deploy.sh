@@ -10,6 +10,8 @@ fi
 
 cd /opt/mysql.javanile.org
 
+echo "==> Update"
 git pull
 
+echo "==> Restart"
 make start
