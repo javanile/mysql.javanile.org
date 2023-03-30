@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+rm -fr /opt/mysql.javanile.org
+
 if [ ! -d /opt/mysql.javanile.org ]; then
   echo "$1" | sudo -S apt-get install make
   echo "$1" | sudo -S git config --global --add safe.directory /opt/mysql.javanile.org

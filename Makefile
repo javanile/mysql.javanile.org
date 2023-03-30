@@ -16,4 +16,13 @@ deploy:
 
 restart:
 	@docker compose pull
-	@docker compose up -d --force-recreate
+	@docker compose up -d --force-recreate && sleep 10
+	@docker compose logs mysql
+
+## =====
+## Tests
+## =====
+
+test:
+	@docker compose up -d
+	@docker compose exec mysql printenv
