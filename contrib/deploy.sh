@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-rm -fr /opt/mysql.javanile.org
+echo "$1" | sudo -S rm -fr /opt/mysql.javanile.org
 
 if [ ! -d /opt/mysql.javanile.org ]; then
   echo "$1" | sudo -S apt-get install make
