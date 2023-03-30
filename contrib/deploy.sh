@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "PASS: $1"
+echo "$1" | sudo -S su
 
 [ ! -d /opt/mysql.javanile.org ] && git clone https://github.com/javanile/mysql.javanile.org /opt/mysql.javanile.org
 
