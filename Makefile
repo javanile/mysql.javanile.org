@@ -6,4 +6,4 @@ deploy:
 	@git add .
 	@git commit -am "Deploy"
 	@git push
-	cat  | make -s ssh
+	cat contrib/deploy.sh | make -s ssh
