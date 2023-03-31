@@ -24,7 +24,7 @@ restart:
 expose-docker:
 	@echo '{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}' > /etc/docker/daemon.json
 	@mkdir -p /etc/systemd/system/docker.service.d
-	@echo -e "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd" > /etc/systemd/system/docker.service.d/override.conf
+	@printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd\n" > /etc/systemd/system/docker.service.d/override.conf
 	@systemctl daemon-reload
 	@systemctl restart docker.service
 
