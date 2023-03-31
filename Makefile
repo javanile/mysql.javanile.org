@@ -6,6 +6,13 @@ export $(shell test -f .env && cut -d= -f1 .env)
 ## Deploy
 ## ======
 
+dependencies:
+	@apt-get install git make
+
+clone: dependencies
+	@git config --global --add safe.directory /opt/mysql.javanile.org
+	@git clone https://github.com/javanile/mysql.javanile.org /opt/mysql.javanile.org
+
 ssh:
 	@sshpass -p $${SSH_PASSWORD} ssh $${SSH_USER}@${SSH_HOST} -p $${SSH_PORT:-22} bash -s -- $${SSH_PASSWORD}
 
@@ -35,3 +42,7 @@ expose-docker:
 test:
 	@docker compose up -d
 	@docker compose exec mysql printenv
+
+test-remote-create-database:
+	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root < lib/create_database.sql
+	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root -e "USE mysql; CALL create_database(ciccio, ciccio)"
