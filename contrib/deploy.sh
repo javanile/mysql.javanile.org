@@ -20,7 +20,7 @@ if [ ! -f .env ]; then
   echo "$1" | sudo -S cp .env.prod .env
 fi
 
-echo "$1" | make expose-docker
+echo "$1" | sudo -S make expose-docker
 
 
 echo "==> Restart"
