@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   mysql:
     image: javanile/mysql:8.0.31
     ports:
@@ -8,3 +9,14 @@ services:
     environment:
       - MYSQL_ROOT_HOST
       - MYSQL_ROOT_PASSWORD
+
+  backup:
+    image: javanile/backup
+    command:
+      - 1 2 * * *   backup.sh
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - FTP_HOST
+
+
+

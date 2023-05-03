@@ -3,6 +3,13 @@ include .env
 export $(shell test -f .env && cut -d= -f1 .env)
 
 ## ======
+## Docker
+## ======
+
+up:
+	@docker compose up -d
+
+## ======
 ## Deploy
 ## ======
 
@@ -43,6 +50,10 @@ test:
 	@docker compose up -d
 	@docker compose exec mysql printenv
 
+test-create-database:
+	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root' < lib/create_database.sql
+	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root' < tests/fixtures/create_database.sql
+
 test-remote-create-database:
 	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root < lib/create_database.sql
-	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root -e "USE mysql; CALL create_database(ciccio, ciccio)"
+	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root -e "USE mysql; CALL create_database(test)"
