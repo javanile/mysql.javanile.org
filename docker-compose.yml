@@ -11,12 +11,13 @@ services:
       - MYSQL_ROOT_PASSWORD
 
   backup:
-    image: javanile/backup
-    command:
-      - 1 2 * * *   backup.sh
+    image: databack/mysql-backup
     environment:
-      - MYSQL_ROOT_PASSWORD
-      - FTP_HOST
-
-
-
+      - DB_SERVER=mysql
+      - DB_USER=root
+      - DB_PASS=${MYSQL_ROOT_PASSWORD}
+      - SINGLE_DATABASE=true
+      - DB_DUMP_BY_SCHEMA=true
+      - DB_DUMP_TARGET=smb://${SMB_HOST}/${SMB_SHARE}${SMB_PATH}
+      - SMB_USER=${SMB_USER}
+      - SMB_PASS=${SMB_PASSWORD}
