@@ -50,9 +50,11 @@ test:
 	@docker compose up -d
 	@docker compose exec mysql printenv
 
+test-file:
+	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root'
+
 test-create-database:
-	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root' < lib/create_database.sql
-	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root' < tests/fixtures/create_database.sql
+	@bash tests/create-database-test.sh
 
 test-remote-create-database:
 	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root < lib/create_database.sql
