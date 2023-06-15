@@ -24,7 +24,7 @@ ssh:
 	@sshpass -p $${SSH_PASSWORD} ssh $${SSH_USER}@${SSH_HOST} -p $${SSH_PORT:-22} bash -s -- $${SSH_PASSWORD}
 
 deploy:
-	@date > contrib/RELEASE
+	@sed -i '3s/.*/> **Last deploy**: $(shell date +"%Y-%m-%d %H:%M:%S")/' README.md
 	@git add .
 	@git commit -am "Deploy"
 	@git push
