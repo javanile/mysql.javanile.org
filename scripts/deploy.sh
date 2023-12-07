@@ -11,4 +11,5 @@ git push
 
 source ".env.$env"
 
-echo $MYSQL_ROOT_PASSWORD
+export MYSQL_PWD=$MYSQL_ROOT_PASSWORD
+mysql -h "$MYSQL_HOST" -u root < lib/create_database.sql
