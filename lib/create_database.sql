@@ -14,7 +14,7 @@ BEGIN
     DECLARE `database_password` CHAR(40) DEFAULT '';
     DECLARE `database_quoted_name` CHAR(40) DEFAULT '';
 
-    SET `database_password` := MD5(RAND());
+    SET `database_password` := CONCAT('Javanile:', MD5(RAND()));
     SET `database_quoted_name` := CONCAT('\'', REPLACE(TRIM(`database_name`), CHAR(39), CONCAT(CHAR(92), CHAR(39))), '\'');
     SET `database_password` := CONCAT('\'', REPLACE(`database_password`, CHAR(39), CONCAT(CHAR(92), CHAR(39))), '\'');
 
