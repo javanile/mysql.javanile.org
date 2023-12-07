@@ -2,8 +2,8 @@
 set -e
 
 env=$1
-
-sed -i '3s/.*/> **Last deploy**: '$(shell date +"%Y-%m-%d %H:%M:%S")'/' README.md
+date=$(date +"%Y-%m-%d %H:%M:%S")
+sed -i "3s/.*/> **Last deploy**: ${date}/" README.md
 
 git add .
 git commit -am "Deploy" && true
