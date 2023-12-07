@@ -35,11 +35,19 @@ BEGIN
     PREPARE `statement_sql` FROM @`create_database_sql`;
     EXECUTE `statement_sql`;
 
-    -- ---------------- --
-    -- Grant Privileges --
-    -- ---------------- --
+    -- --------------------- --
+    -- Grant User Privileges --
+    -- --------------------- --
     SET @`grant_privileges_sql` := CONCAT('GRANT ALL PRIVILEGES ON ', `database_name`, '.* TO ', `database_quoted_name`, `database_host`);
     SELECT @`grant_privileges_sql` AS `--> Grant User Privileges`;
+    PREPARE `statement_sql` FROM @`grant_privileges_sql`;
+    EXECUTE `statement_sql`;
+
+    -- --------------------- --
+    -- Grant Root Privileges --
+    -- --------------------- --
+    SET @`grant_privileges_sql` := CONCAT('GRANT ALL PRIVILEGES ON ', `database_name`, '.* TO ', '\'root\'', `database_host`);
+    SELECT @`grant_privileges_sql` AS `--> Grant Root Privileges`;
     PREPARE `statement_sql` FROM @`grant_privileges_sql`;
     EXECUTE `statement_sql`;
 
