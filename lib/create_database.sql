@@ -22,7 +22,7 @@ BEGIN
     -- Create User --
     -- ----------- --
     SET @`create_user_sql` := CONCAT('CREATE USER IF NOT EXISTS ', `database_quoted_name`, `database_host`, ' IDENTIFIED BY ', `database_password`);
-    SELECT @`create_user_sql`;
+    SELECT @`create_user_sql` AS `--> Create User`;
     PREPARE `statement_sql` FROM @`create_user_sql`;
     EXECUTE `statement_sql`;
 
@@ -30,7 +30,7 @@ BEGIN
     -- Create Database --
     -- --------------- --
     SET @`create_database_sql` := CONCAT('CREATE DATABASE IF NOT EXISTS ', `database_name`);
-    SELECT @`create_database_sql`;
+    SELECT @`create_database_sql` AS `--> Create Database`;
     PREPARE `statement_sql` FROM @`create_database_sql`;
     EXECUTE `statement_sql`;
 
@@ -38,7 +38,7 @@ BEGIN
     -- Grant Privileges --
     -- ---------------- --
     SET @`grant_privileges_sql` := CONCAT('GRANT ALL PRIVILEGES ON ', `database_name`, '.* TO ', `database_quoted_name`, `database_host`);
-    SELECT @`grant_privileges_sql`;
+    SELECT @`grant_privileges_sql` AS `--> Grant User Privileges`;
     PREPARE `statement_sql` FROM @`grant_privileges_sql`;
     EXECUTE `statement_sql`;
 

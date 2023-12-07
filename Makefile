@@ -24,11 +24,14 @@ test:
 	@docker compose up -d
 	@docker compose exec mysql printenv
 
-test-file:
+test-init:
+	@mkdir -p tests/tmp
+
+test-sql:
 	@docker compose exec -T -e MYSQL_PWD=$${MYSQL_ROOT_PASSWORD} mysql sh -c 'mysql -h 0.0.0.0 -u root'
 
-test-create-database:
-	@bash tests/create-database-test.sh
+test-create-database: test-init
+	@bash tests/create_database_test.sh
 
 test-remote-create-database:
 	@MYSQL_PWD=secret mysql -h $${SSH_HOST} -u root < lib/create_database.sql
