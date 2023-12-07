@@ -11,7 +11,7 @@ BEGIN
     -- Variables --
     -- --------- --
     DECLARE `database_host` CHAR(14) DEFAULT '@\'%\'';
-    DECLARE `database_password` CHAR(40) DEFAULT '';
+    DECLARE `database_password` CHAR(50) DEFAULT '';
     DECLARE `database_quoted_name` CHAR(40) DEFAULT '';
 
     SET `database_password` := CONCAT('Javanile:', MD5(RAND()));
