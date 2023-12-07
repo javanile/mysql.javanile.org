@@ -13,34 +13,8 @@ up:
 ## Deploy
 ## ======
 
-dependencies:
-	@apt-get install git make
-
-clone: dependencies
-	@git config --global --add safe.directory /opt/mysql.javanile.org
-	@git clone https://github.com/javanile/mysql.javanile.org /opt/mysql.javanile.org
-
-ssh:
-	@sshpass -p $${SSH_PASSWORD} ssh $${SSH_USER}@${SSH_HOST} -p $${SSH_PORT:-22} bash -s -- $${SSH_PASSWORD}
-
 deploy:
-	@sed -i '3s/.*/> **Last deploy**: $(shell date +"%Y-%m-%d %H:%M:%S")/' README.md
-	@git add .
-	@git commit -am "Deploy"
-	@git push
-	@cat contrib/deploy.sh | make -s ssh
-
-restart:
-	@docker compose pull
-	@docker compose up -d --force-recreate && sleep 15
-	@docker compose logs mysql
-
-expose-docker:
-	@echo '{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}' > /etc/docker/daemon.json
-	@mkdir -p /etc/systemd/system/docker.service.d
-	@printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd\n" > /etc/systemd/system/docker.service.d/override.conf
-	@systemctl daemon-reload
-	@systemctl restart docker.service
+	@bash scripts/deploy.sh $(env)
 
 ## =====
 ## Tests
